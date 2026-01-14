@@ -7,6 +7,38 @@ import { useInView } from 'react-intersection-observer'
 import { Hero } from '../components/Hero'
 import { SEO } from '../components/SEO'
 import { getRandomOptions } from '../utils/getRandomOptions'
+import { ArrowRight } from 'react-feather'
+
+const ThoughtbaseAd = () => {
+  return (
+    <div className="group w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex items-center">
+      <div className="border rounded-lg p-6 m-2 transition-shadow">
+        <div className="flex items-center justify-center mb-4">
+          <img
+            src="/icon.svg"
+            alt="Thoughtbase"
+            className="w-16 h-16 text-blue-600"
+          />
+        </div>
+        <p className="text-md text-gray-700 mb-3 text-left leading-relaxed">
+          Hey, thanks for checking out BeanHeads!
+          <br />
+          <br />
+          If you'd like to support me, check out <strong>Thoughtbase</strong> -
+          my new tool for organizing user feedback <br /> <br />
+          <a
+            href="https://thoughtbase.app?utm_source=beanheads&utm_medium=referral"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-lg bg-indigo-400 hover:bg-indigo-500 font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Learn more <ArrowRight />
+          </a>
+        </p>
+      </div>
+    </div>
+  )
+}
 
 const RandomAvatar = () => {
   const options = getRandomOptions()
@@ -33,9 +65,13 @@ const RandomAvatars = React.memo(
     return useMemo(
       () => (
         <>
-          <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-            <RandomAvatar />
-          </div>
+          {page === 1 ? (
+            <ThoughtbaseAd />
+          ) : (
+            <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+              <RandomAvatar />
+            </div>
+          )}
           <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <RandomAvatar />
           </div>
