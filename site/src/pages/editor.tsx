@@ -24,7 +24,15 @@ import {
   graphicsMap,
   theme,
 } from 'beanheads'
-import { Download, Code, Image, ArrowLeft, RefreshCw } from 'react-feather'
+import {
+  Download,
+  Code,
+  Image,
+  ArrowLeft,
+  RefreshCw,
+  ArrowRight,
+  X,
+} from 'react-feather'
 import { SEO } from '../components/SEO'
 import { getRandomOptions } from '../utils/getRandomOptions'
 
@@ -52,6 +60,53 @@ const settingMaps: SettingMaps = {
   hat: hatMap,
   hatColor: theme.colors.clothing,
   lashes: { true: 'true', false: 'false' },
+}
+
+const ThoughtbaseAdCompact = () => {
+  const [isDismissed, setIsDismissed] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return localStorage.getItem('thoughtbase-ad-dismissed') === 'true'
+  })
+
+  const handleDismiss = () => {
+    setIsDismissed(true)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('thoughtbase-ad-dismissed', 'true')
+    }
+  }
+
+  if (isDismissed) return null
+
+  return (
+    <div className="fixed right-0 top-0 p-4 z-50 max-w-xs">
+      <div className="bg-white border rounded-lg p-4 shadow-lg relative">
+        <div className="absolute top-0 right-0 p-4">
+          <button
+            onClick={handleDismiss}
+            className=" text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Dismiss"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="flex items-center mb-2">
+          <img src="/icon.svg" alt="Thoughtbase" className="w-8 h-8 mr-2" />
+          <span className="font-semibold text-sm">Thoughtbase</span>
+        </div>
+        <p className="text-xs text-gray-700 mb-2 leading-relaxed">
+          Collect and manage product feedback with Thoughtbase
+        </p>
+        <a
+          href="https://thoughtbase.app?utm_source=beanheads&utm_medium=referral"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white text-xs bg-indigo-400 hover:bg-indigo-500 font-bold py-2 px-3 rounded inline-flex items-center"
+        >
+          Learn more <ArrowRight className="w-3 h-3 ml-1" />
+        </a>
+      </div>
+    </div>
+  )
 }
 
 function Editor({ location }: { location: Location }) {
@@ -136,6 +191,7 @@ const Example = () => (
   return (
     <>
       <SEO title="Bean Head Editor" />
+      <ThoughtbaseAdCompact />
       <div className="px-4 py-8">
         <div className="flex flex-col container mx-auto">
           <h1 className="text-4xl font-semibold text-center relative flex flex-col justify-center">
